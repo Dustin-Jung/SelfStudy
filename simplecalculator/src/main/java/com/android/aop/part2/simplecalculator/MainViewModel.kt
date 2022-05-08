@@ -1,41 +1,58 @@
 package com.android.aop.part2.simplecalculator
 
+import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.logging.Handler
 
 class MainViewModel : ViewModel() {
-    private val _number = MutableLiveData<Int>()
 
+    val inputEditText1LiveData = MutableLiveData<String>()
+    val inputEditText2LiveData = MutableLiveData<String>()
 
-    init {
-        _number.value = 0
-    }
+    private val _mainViewStateLiveData = MutableLiveData<MainViewState>()
+    val mainViewStateLiveData: LiveData<MainViewState> = _mainViewStateLiveData
 
-    val number = LiveData<Int>
-        get() = _number
+    fun calc(op: Operator) {
+        if (!inputEditText1LiveData.value.isNullOrEmpty() && !inputEditText2LiveData.value.isNullOrEmpty()) {
+            when (op) {
+                is Operator.Plus -> {
+                    _mainViewStateLiveData.value = MainViewState.Progress(true)
+                    android.os.Handler(Looper.getMainLooper()).postDelayed(
+                        {
+                            _mainViewStateLiveData.value =
+                                MainViewState.OperateResult((inputEditText1LiveData.value!!.toInt() + inputEditText2LiveData.value!!.toInt()).toString())
+                            _mainViewStateLiveData.value = MainViewState.Progress(false)
+                        }, 1000L
+                    )
+                }
 
+                is Operator.Min -> {
+                    _mainViewStateLiveData.value =
+                        MainViewState.OperateResult((inputEditText1LiveData.value!!.toInt() - inputEditText2LiveData.value!!.toInt()).toString())
+                }
 
-    fun calculation(name:String) : ((Int, Int) -> Int)?{
-        var value: ((Int, Int) -> Int)? = null
-        when (name) {
-            "plus" -> {
-                value = { a, b -> a + b }
+                is Operator.Mul -> {
+                    _mainViewStateLiveData.value =
+                        MainViewState.OperateResult((inputEditText1LiveData.value!!.toInt() * inputEditText2LiveData.value!!.toInt()).toString())
+                }
+
+                is Operator.Div -> {
+                    _mainViewStateLiveData.value =
+                        MainViewState.OperateResult((inputEditText1LiveData.value!!.toInt() / inputEditText2LiveData.value!!.toInt()).toString())
+                }
             }
-            "minus" -> {
-                value = { a, b -> a - b }
-            }
-            "multiply" -> {
-                value = { a, b -> a * b }
-            }
-            "divide" -> {
-                value = { a, b -> a / b }
-            }
+        } else {
+            _mainViewStateLiveData.value = MainViewState.Error("값을 모두 입력해주세요.")
         }
-
-        return value
     }
 
-
+    sealed class Operator {
+        object Plus : Operator()
+        object Min : Operator()
+        object Mul : Operator()
+        object Div : Operator()
+    }
 }
 
