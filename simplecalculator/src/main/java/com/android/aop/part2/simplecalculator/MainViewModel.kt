@@ -5,15 +5,30 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-    private val _number = MutableLiveData<Int>()
+    val firstNumLiveData = MutableLiveData<String>()
+    val secondNumLiveData = MutableLiveData<String>()
+    val _resultLiveData = MutableLiveData<Int>()
+    val resultLiveData: LiveData<Int>
+        get() = _resultLiveData
 
 
-    init {
-        _number.value = 0
+    fun plus(){
+        if(firstNumLiveData.value != null && secondNumLiveData.value != null){
+            _resultLiveData.value = (firstNumLiveData.value!!.toInt() + secondNumLiveData.value!!.toInt())
+        }
     }
 
-    val number = LiveData<Int>
-        get() = _number
+    fun minus(){
+
+    }
+
+    fun multiply(){
+
+    }
+
+    fun divide(){
+
+    }
 
 
     fun calculation(name:String) : ((Int, Int) -> Int)?{

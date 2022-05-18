@@ -2,6 +2,9 @@ package com.android.aop.part2.simplecalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,8 +21,13 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.viewModel = mainViewModel
 
-        mainViewModel.number.observe(this, Observer {
-            binding._number.inputEditText1.text = it.toString()
+
+        mainViewModel.firstNumLiveData.observe(this){
+
+        }
+
+        mainViewModel.resultLiveData.observe(this){result ->
+            binding.outputTextView.text = result.toString()
         }
     }
 

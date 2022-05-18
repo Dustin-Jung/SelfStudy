@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/App/Ws/AndroidStudio/SelfStudy/app/src/main/res/layout/activity_main.xml" value="0.20244565217391305" />
         <entry key="..\:/App/Ws/AndroidStudio/SelfStudy/simplecalculator/src/main/res/layout/activity_main.xml" value="0.20244565217391305" />
+        <entry key="..\:/App/Ws/AndroidStudio/SelfStudy/useditemsellingapp/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1475" />
+        <entry key="..\:/App/Ws/AndroidStudio/SelfStudy/useditemsellingapp/src/main/res/layout/activity_add_article.xml" value="0.20244565217391305" />
+        <entry key="..\:/App/Ws/AndroidStudio/SelfStudy/useditemsellingapp/src/main/res/menu/bottom_navigation_menu.xml" value="0.25" />
       </map>
     </option>
   </component>
