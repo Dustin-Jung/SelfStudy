@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "SelfStudy"
 include ':app'
 include ':simplecalculator'
-include ':useditemsellingapp'
+
+include ':todolist'
+include ':ottappintro'
