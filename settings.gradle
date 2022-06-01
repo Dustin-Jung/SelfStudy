@@ -18,3 +18,5 @@ include ':simplecalculator'
 
 include ':todolist'
 include ':ottappintro'
+include ':locationsearch'
+include ':navermoviesearch'
