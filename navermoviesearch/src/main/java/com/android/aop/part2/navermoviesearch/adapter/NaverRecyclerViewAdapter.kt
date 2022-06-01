@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.aop.part2.navermoviesearch.api.Item
 import com.android.aop.part2.navermoviesearch.databinding.NaverItemBinding
 
-class NaverRecyclerViewAdapter: RecyclerView.Adapter<NaverViewHolder>() {
+class NaverRecyclerViewAdapter : RecyclerView.Adapter<NaverViewHolder>() {
 
     private val itemList = mutableListOf<Item>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NaverViewHolder {
-        val binding = NaverItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = NaverItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NaverViewHolder(binding)
     }
 
@@ -23,16 +23,16 @@ class NaverRecyclerViewAdapter: RecyclerView.Adapter<NaverViewHolder>() {
         return itemList.size
     }
 
-    fun addAll(list: List<Item>){
+    fun addAll(list: List<Item>) {
         itemList.addAll(list)
         notifyDataSetChanged()
     }
 }
 
-class NaverViewHolder(private val binding: NaverItemBinding):RecyclerView.ViewHolder(binding.root){
+class NaverViewHolder(private val binding: NaverItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item:Item){
+    fun bind(item: Item) {
         binding.item = item
-
     }
 }

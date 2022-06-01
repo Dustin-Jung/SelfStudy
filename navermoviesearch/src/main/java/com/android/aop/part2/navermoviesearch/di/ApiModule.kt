@@ -13,12 +13,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-     @Singleton
-     @Provides
-     fun provideNaverService(): NaverService {
-         return Retrofit.Builder()
-             .baseUrl("https://openapi.naver.com/")
-             .addConverterFactory(GsonConverterFactory.create())
-             .build().create(NaverService::class.java)
-     }
+    @Singleton
+    @Provides
+    fun provideNaverService(): NaverService {
+        return Retrofit.Builder()
+            .baseUrl("https://openapi.naver.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build().create(NaverService::class.java)
+    }
 }

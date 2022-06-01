@@ -29,19 +29,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initViewModel(){
-        mainViewModel.mainViewStateLiveData.observe(this){viewStat->
-            when(viewStat){
+        mainViewModel.mainViewStateLiveData.observe(this){viewState->
+            when(viewState){
 
                 is MainViewState.GetNaverList ->{
-                    NaverRecyclerViewAdapter.addAll(viewState.list)
+                    naverAdapter.addAll(viewState.list)
                 }
 
                 is MainViewState.Error->{
                     Toast.makeText(this,viewState.message,Toast.LENGTH_LONG).show()
                 }
             }
-
         }
-
     }
 }
