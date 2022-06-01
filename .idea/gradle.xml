@@ -15,11 +15,11 @@
             <option value="$PROJECT_DIR$/locationsearch" />
             <option value="$PROJECT_DIR$/navermoviesearch" />
             <option value="$PROJECT_DIR$/ottappintro" />
+            <option value="$PROJECT_DIR$/sample" />
             <option value="$PROJECT_DIR$/simplecalculator" />
             <option value="$PROJECT_DIR$/todolist" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.android.aop.part2.navermoviesearch"
-        minSdk 23
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -32,12 +32,14 @@ android {
         jvmTarget = '1.8'
     }
 
-    dataBinding{
+    dataBinding {
         enabled = true
     }
 }
 
 dependencies {
+
+    implementation project(":sample")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -62,4 +64,5 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
 }

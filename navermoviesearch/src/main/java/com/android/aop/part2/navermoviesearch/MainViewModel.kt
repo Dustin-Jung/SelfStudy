@@ -5,7 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.aop.part2.navermoviesearch.data.repo.NaverRepository
+import com.android.aop.part2.navermoviesearch.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,13 +25,22 @@ class MainViewModel @Inject constructor(private val naverRepository: NaverReposi
     }
 
     private fun getNaverListFromAPI() {
-        naverRepository.search(query = "어벤저스", onSuccess = { list ->
-            Log.d("결과", list.items.size.toString())
-            _mainViewStateLiveData.value = MainViewState.GetNaverList(list.items)
-        }, onFailure = { errorMessage ->
-            Log.d("결과", errorMessage)
-            _mainViewStateLiveData.value = MainViewState.Error(errorMessage)
-        })
+        CoroutineScope(Dispatchers.IO).launch {
+            when (val result = naverRepository.search(query = "어벤져스")) {
+                is Result.Success -> {
+                    withContext(Dispatchers.Main) {
+                        _mainViewStateLiveData.value = MainViewState.GetNaverList(result.data.items)
+                    }
+                }
+
+                is Result.Error -> {
+                    withContext(Dispatchers.Main) {
+                        _mainViewStateLiveData.value =
+                            MainViewState.Error(result.exception.message ?: "Error!")
+                    }
+                }
+            }
+        }
     }
 
 }

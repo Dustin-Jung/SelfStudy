@@ -25,7 +25,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
    private fun initUI(){
        binding.recyclerView.adapter = naverAdapter
-
     }
 
     private fun initViewModel(){
